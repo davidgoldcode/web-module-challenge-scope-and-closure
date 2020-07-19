@@ -63,8 +63,16 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+The closure is in the console.log in the nested function. It calls the name parameter given in the parent function. 
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+When we call 'dansRoll', the argument is always the same and running through the same function. What changes is both the the const within the personalDice function and the const of dansRoll because we have a random() method within it. 
+
 c. What is the lexical scope of `newRoll`? 
+
+The lexical scope of `newRoll` is the full block starting with our `personalDice` function. Although it's a nested function, it's able to access the local scope contents of it's parent. 
 
 ### Task 2c - Exit Ticket
 
