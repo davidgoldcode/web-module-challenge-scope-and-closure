@@ -28,9 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *  Counter 1 has a closure where the function nested within the function counterMaker() has access to the local variable count 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * Counter 1 uses a closure. It is both a function nested within a function and references a local variable from it's parent 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * Counter 1 offers a level of protection not available to counter 2. At first glance, counter 2 looks like it would accomplish what we need it too, but the variable 'count' can be adjusted through any script on our page. It serves a singular purpose so this leaves it exposed. Count 1, on the other hand, offers protection because the only adjustment can be made / inacted by it's nested function. 
  *
 */
 
@@ -56,10 +62,9 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  let pointsScored = Math.floor(Math.random() * 3);
+  return pointsScored; 
 }
 
 /* Task 3: finalScore()
