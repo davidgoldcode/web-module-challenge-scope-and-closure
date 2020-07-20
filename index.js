@@ -28,7 +28,7 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
- *  Counter 1 has a closure where the function nested within the function counterMaker() has access to the local variable count 
+ *  Counter 1 has a closure where the function nested within the function counterMaker() has access to the local variable 'count' 
  * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
@@ -80,7 +80,7 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(numInnings, callback){
+function finalScore(callback, numInnings){
   let gameScore = {'Home': 0, 'Away': 0}
   for (let i = 1; i <= numInnings; i++) {
     gameScore['Home'] += callback();
@@ -110,31 +110,44 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
-function inning(){
-  return Math.floor(Math.random() * 3); 
+function scoreboard(finalScore, cbInning, numInning) {
+  let wordEnd = ['st', 'th', 'rd', 'th'];
+  let gameScore = {'Home': 0, 'Away': 0}
+  for (let i = 1; i <= numInning; i++) {
+    let gameScore = {'Home': 0, 'Away': 0};
+    finalScore(cbInning, i);
+    gameScore['Home'] += finalScore(cbInning(), i);
+    gameScore['Away'] += finalScore(cbInning(), i);
+    if (i > 3) {
+      return `${i + wordEnd[3]} inning: ${gameScore['Away'][i]} - ${gameScore['Home'][i]} `
+    } else {
+      return `${i + wordEnd[i]} inning: ${gameScore['Away'][i]} - ${gameScore['Home'][i]} `
+    }
+  }  
 }
 
+console.log('task4', scoreBoard(finalScore, inning, 9));
 
-function scoreboard(inning, numOfInnings) {
-let obj = {'Home': 0, 'Away': 0}
-  function getInningScore() {
-    for (let i = 1; i <= numOfInnings; i++) {
-      obj['Home'] += inning();
-      obj['Away'] += inning();  
-      console.log(obj);
-      if (i === 1) {
-        n = 'st';
-      } else if (i === 2) {
-        n = 'th ';
-      } else if (i === 3) {
-        n = 'rd';      
-      } else {
-        n = 'th';
-      } 
-    } return `${i+n} inning: ${gameScore['Home']} - ${gameScore['Away']}`;
-  }
-}
+// function scoreboard(inning, numOfInnings) {
+// let obj = {'Home': 0, 'Away': 0}
+//   function getInningScore() {
+//     for (let i = 1; i <= numOfInnings; i++) {
+//       obj['Home'] += inning();
+//       obj['Away'] += inning();  
+//       console.log(obj);
+//       if (i === 1) {
+//         n = 'st';
+//       } else if (i === 2) {
+//         n = 'th ';
+//       } else if (i === 3) {
+//         n = 'rd';      
+//       } else {
+//         n = 'th';
+//       } 
+//     } return `${i+n} inning: ${gameScore['Home']} - ${gameScore['Away']}`;
+//   }
+// }
 
-console.log('task 4', scoreboard(inning, 9));
+// console.log('task 4', scoreboard(inning, 9));
 
 
