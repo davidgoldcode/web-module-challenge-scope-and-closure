@@ -9,7 +9,7 @@
     ```
 
 // I predict the output will be:
-'a defined? false'
+'a defined? false' - b is most recently defined so it's read as a; or a = undefined
 'b defined? true'
     
 //     2. Write a function that would allow you to do this using a closure. (This is another interview question we've seen before - when you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions)).

@@ -66,6 +66,8 @@ function inning(){
   return Math.floor(Math.random() * 3); 
 }
 
+console.log('task 2', inning());
+
 /* Task 3: finalScore()
 
 Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
@@ -88,7 +90,7 @@ function finalScore(numInnings, callback){
   } return gameScore;
   }
 
-console.log(finalScore(9, inning));  
+console.log('task 3', finalScore(9, inning));  
 
 /* Task 4: 
 
@@ -130,7 +132,14 @@ function scoreboard(getInningScore, inning, numInning) {
     const currentInning = getInningScore(inning);
     home += currentInning['Home'];
     away += currentInning['Away'];
-    if (i > 4) {
+    if (i >= 10) {
+      boxScore.push(`Extra Innings!`)
+      boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)  
+    } else if (i === 9 && i === numInning) {
+      boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)
+      boxScore.push(`Final Score: Away ${away} - Home ${home}`)
+    }
+    else if (i > 4) {
       boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)  
   } else {
     boxScore.push(`${i + wordEnd[i - 1]} Inning: Away ${away} - Home ${home}`)
@@ -140,5 +149,6 @@ function scoreboard(getInningScore, inning, numInning) {
 }
 
 console.log('task 4', scoreboard(getInningScore, inning, 7));
+console.log('task 4', scoreboard(getInningScore, inning, 10));
 
 
