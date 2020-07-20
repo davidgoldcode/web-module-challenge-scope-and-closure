@@ -64,7 +64,7 @@ dansRoll();
 
 a. Where is closure used in this code? How can you tell?
 
-The closure is in the console.log in the nested function. It calls the name parameter given in the parent function. 
+The closure is in the nested function. It calls the name parameter given in the parent function. 
 
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
 

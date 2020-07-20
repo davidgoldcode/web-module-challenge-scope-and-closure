@@ -80,7 +80,7 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(callback, numInnings){
+function finalScore(numInnings, callback){
   let gameScore = {'Home': 0, 'Away': 0}
   for (let i = 1; i <= numInnings; i++) {
     gameScore['Home'] += callback();
@@ -110,23 +110,63 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(finalScore, cbInning, numInning) {
-  let wordEnd = ['st', 'th', 'rd', 'th'];
-  let gameScore = {'Home': 0, 'Away': 0}
-  for (let i = 1; i <= numInning; i++) {
-    let gameScore = {'Home': 0, 'Away': 0};
-    finalScore(cbInning, i);
-    gameScore['Home'] += finalScore(cbInning(), i);
-    gameScore['Away'] += finalScore(cbInning(), i);
-    if (i > 3) {
-      return `${i + wordEnd[3]} inning: ${gameScore['Away'][i]} - ${gameScore['Home'][i]} `
-    } else {
-      return `${i + wordEnd[i]} inning: ${gameScore['Away'][i]} - ${gameScore['Home'][i]} `
-    }
-  }  
+function inning(){
+  return Math.floor(Math.random() * 3); 
 }
 
-console.log('task4', scoreBoard(finalScore, inning, 9));
+function getInningScore(cbInning) {
+  let gameScore = {'Home': 0, 'Away': 0};
+  gameScore['Home'] += cbInning();
+  gameScore['Away'] += cbInning(); 
+  return gameScore;
+}
+
+function scoreboard(getInningScore, inning, numInning) {
+  let wordEnd = ['st', 'th', 'rd', 'th'];
+  let scorePerInning = [];
+  for (var i = 1; i <= numInning; i++) {
+    scorePerInning.push(getInningScore(inning));
+    scorePerInning.map((getInningScore(inning), scorePerInning[i -1]) => scorePerInning[i-2] + scorePerInning[i - 1])
+  } // end of for loop
+
+  for (let j = 0; j < scorePerInning.length; j++) {
+
+  } //end of 2nd loop
+
+  // if (i >= 8) {
+  //   let ret = `${i + wordEnd[i - 1]} inning: ${scorePerInning[i - 1]['Away']} - ${scorePerInning[i - 1]['Home']} \n Final Score: ${scorePerInning[i - 1]['Away']} - ${scorePerInning[i - 1]['Home']}`
+  //   return ret;
+  // } else {
+  //   return `${i + wordEnd[i - 1]} inning: ${scorePerInning[i - 1]['Away']} - ${scorePerInning[i - 1]['Home']} `
+  // }
+}
+
+console.log(scoreboard(getInningScore, inning, 7));
+
+
+// function getInningScore(cbInning, numInning) {
+//   let gameScore = {'Home': 0, 'Away': 0};
+//   let wordEnd = ['st', 'th', 'rd', 'th'];
+//   for (let i = 1; i <= numInning; i++) {
+//     gameScore['Home'] += cbInning();
+//     gameScore['Away'] += cbInning();
+//     if (i > 3) {
+//     return `${i + wordEnd[3]} inning: ${gameScore['Away'][i]} - ${gameScore['Home'][i]} `
+//   } else {
+//     return `${i + wordEnd[i - 1]} inning: ${gameScore['Away'][i - 1]} - ${gameScore['Home'][i - 1]} `
+//   }  
+// }
+// }
+
+// console.log(getInningScore(inning, 7));
+
+// function scoreboard(finalScore, cbInning, numInning) {
+//   let wordEnd = ['st', 'th', 'rd', 'th'];
+//      // end of if and statement
+//   } // end of loop 
+// }
+
+// console.log('task4', scoreboard(finalScore, inning, 9));
 
 // function scoreboard(inning, numOfInnings) {
 // let obj = {'Home': 0, 'Away': 0}
