@@ -28,9 +28,15 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ *  Counter 1 has a closure where the function nested within the function counterMaker() has access to the local variable 'count' 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
+ * Counter 1 uses a closure. It is both a function nested within a function and references a local variable from it's parent 
+ * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * Counter 1 offers a level of protection not available to counter 2. At first glance, counter 2 looks like it would accomplish what we need it too, but the variable 'count' can be adjusted through any script on our page. It serves a singular purpose so this leaves it exposed. Count 1, on the other hand, offers protection because the only adjustment can be made / inacted by it's nested function. 
  *
 */
 
@@ -56,11 +62,11 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  return Math.floor(Math.random() * 3); 
 }
+
+console.log('task 2', inning());
 
 /* Task 3: finalScore()
 
@@ -76,11 +82,15 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(numInnings, callback){
+  let gameScore = {'Home': 0, 'Away': 0}
+  for (let i = 1; i <= numInnings; i++) {
+    gameScore['Home'] += callback();
+    gameScore['Away'] += callback();
+  } return gameScore;
+  }
 
-  /*Code Here*/
-
-}
+console.log('task 3', finalScore(9, inning));  
 
 /* Task 4: 
 
@@ -102,9 +112,43 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
-
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function inning(){
+  return Math.floor(Math.random() * 3); 
 }
+
+function getInningScore(cbInning) {
+  let gameScore = {'Home': 0, 'Away': 0};
+  gameScore['Home'] += cbInning();
+  gameScore['Away'] += cbInning(); 
+  return gameScore;
+}
+
+function scoreboard(getInningScore, inning, numInning) {
+  let wordEnd = ['st', 'nd', 'rd', 'th'];
+  const boxScore = [];
+  let home = 0;
+  let away = 0;
+  for (var i = 1; i <= numInning; i++) {
+    const currentInning = getInningScore(inning);
+    home += currentInning['Home'];
+    away += currentInning['Away'];
+    if (i >= 10) {
+      boxScore.push(`Extra Innings!`)
+      boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)  
+    } else if (i === 9 && i === numInning) {
+      boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)
+      boxScore.push(`Final Score: Away ${away} - Home ${home}`)
+    }
+    else if (i > 4) {
+      boxScore.push(`${i + wordEnd[3]} Inning: Away ${away} - Home ${home}`)  
+  } else {
+    boxScore.push(`${i + wordEnd[i - 1]} Inning: Away ${away} - Home ${home}`)
+  }
+} return boxScore;
+
+}
+
+console.log('task 4', scoreboard(getInningScore, inning, 7));
+console.log('task 4', scoreboard(getInningScore, inning, 10));
 
 
