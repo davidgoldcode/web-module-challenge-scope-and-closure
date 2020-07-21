@@ -20,8 +20,8 @@
 //     addSix(21); // returns 27
 //     ```
     const addSix = function(num) {
-        return function createBase {
-            return num + 6;
+        return function createBase(n) {
+            return num + n;
         }
     }
 //     3. Research the differences between functional programming and object oriented programming. Then, describe the pros and cons of functional programming vs object-oriented programming. This is a common interview question and great practice!
